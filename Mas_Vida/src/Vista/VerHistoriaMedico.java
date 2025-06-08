@@ -84,7 +84,7 @@ public class VerHistoriaMedico extends javax.swing.JFrame {
 
         jLabelDatosPersonales.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabelDatosPersonales.setText("Datos Personales");
-        getContentPane().add(jLabelDatosPersonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+        getContentPane().add(jLabelDatosPersonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, -1));
 
         jLabelNombre.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabelNombre.setText("Nombres:");
@@ -192,13 +192,13 @@ public class VerHistoriaMedico extends javax.swing.JFrame {
                 jButtonRetrocederActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonRetroceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 500, 70, -1));
+        getContentPane().add(jButtonRetroceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, 70, -1));
 
         jButtonImprimirCita.setBackground(new java.awt.Color(204, 255, 255));
         jButtonImprimirCita.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jButtonImprimirCita.setText("Imprimir Cita");
         jButtonImprimirCita.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(jButtonImprimirCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, -1, -1));
+        getContentPane().add(jButtonImprimirCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 500, -1, -1));
 
         jLabelFondo.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\historial fondo.png")); // NOI18N
         getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

@@ -182,13 +182,13 @@ public class VerCitaPacie extends javax.swing.JFrame {
                 jButtonRetrocederActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonRetroceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 70, -1));
+        getContentPane().add(jButtonRetroceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 70, -1));
 
         jButtonImprimirCita.setBackground(new java.awt.Color(204, 255, 255));
         jButtonImprimirCita.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jButtonImprimirCita.setText("Imprimir Cita");
         jButtonImprimirCita.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(jButtonImprimirCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, -1, -1));
+        getContentPane().add(jButtonImprimirCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 390, -1, -1));
 
         jLabelFondo.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\plantilla citaPaciente-pica (1).png")); // NOI18N
         getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 460));

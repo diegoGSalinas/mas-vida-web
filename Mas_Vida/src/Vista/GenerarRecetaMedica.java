@@ -120,13 +120,13 @@ public class GenerarRecetaMedica extends javax.swing.JFrame {
                 jButtonGenerarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 380, 70, -1));
+        getContentPane().add(jButtonGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, 70, -1));
 
         jButtonSalir.setBackground(new java.awt.Color(204, 255, 255));
         jButtonSalir.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jButtonSalir.setText("Salir");
         jButtonSalir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(jButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 380, 70, -1));
+        getContentPane().add(jButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, 70, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\logoMasVida (1).jpeg")); // NOI18N
         jLabel2.setToolTipText("");
