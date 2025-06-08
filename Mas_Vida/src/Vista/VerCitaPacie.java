@@ -26,21 +26,183 @@ public class VerCitaPacie extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jTextField3 = new javax.swing.JTextField();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jLabelDatosPersonales = new javax.swing.JLabel();
+        jLabelNombre = new javax.swing.JLabel();
+        jLabelApellidoPaterno = new javax.swing.JLabel();
+        jLabelApellidoMaterno = new javax.swing.JLabel();
+        jLabelDocIdentidad = new javax.swing.JLabel();
+        jLabelfechaNacimiento = new javax.swing.JLabel();
+        jLabelTelefono = new javax.swing.JLabel();
+        jLabelCorreo = new javax.swing.JLabel();
+        jTextFieldNombre = new javax.swing.JTextField();
+        jTextFieldDocIdentidad = new javax.swing.JTextField();
+        jTextFieldTelefono = new javax.swing.JTextField();
+        jTextFieldApellidoPaterno = new javax.swing.JTextField();
+        jTextFieldApellidoMaterno = new javax.swing.JTextField();
+        jDateChooserFechaNacimiento = new com.toedter.calendar.JDateChooser();
+        jTextFieldCorreo = new javax.swing.JTextField();
+        jLabelCitasPendientes = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableTablaCitasPendientes = new javax.swing.JTable();
+        jButtonRetroceder = new javax.swing.JButton();
+        jButtonImprimirCita = new javax.swing.JButton();
+        jLabelFondo = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jTextField3.setText("jTextField1");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelDatosPersonales.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabelDatosPersonales.setText("Datos Personales");
+        getContentPane().add(jLabelDatosPersonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
+        jLabelNombre.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jLabelNombre.setText("Nombres:");
+        getContentPane().add(jLabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 95, -1, 20));
+
+        jLabelApellidoPaterno.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jLabelApellidoPaterno.setText("Apellido Parterno:");
+        getContentPane().add(jLabelApellidoPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 95, -1, 20));
+
+        jLabelApellidoMaterno.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jLabelApellidoMaterno.setText("Apellido Materno:");
+        getContentPane().add(jLabelApellidoMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, -1, 20));
+
+        jLabelDocIdentidad.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jLabelDocIdentidad.setText("Doc. de Identidad:");
+        getContentPane().add(jLabelDocIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 125, -1, 20));
+
+        jLabelfechaNacimiento.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jLabelfechaNacimiento.setText("Fecha de Nacimineto:");
+        getContentPane().add(jLabelfechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 125, -1, 20));
+
+        jLabelTelefono.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jLabelTelefono.setText("Teléfono:");
+        getContentPane().add(jLabelTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 155, -1, 20));
+
+        jLabelCorreo.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jLabelCorreo.setText("Correo electrónico:");
+        getContentPane().add(jLabelCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 155, -1, 20));
+
+        jTextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNombreActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 153, -1));
+        getContentPane().add(jTextFieldDocIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 153, -1));
+        getContentPane().add(jTextFieldTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 153, -1));
+        getContentPane().add(jTextFieldApellidoPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 86, -1));
+        getContentPane().add(jTextFieldApellidoMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 86, -1));
+        getContentPane().add(jDateChooserFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 86, -1));
+        getContentPane().add(jTextFieldCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 168, -1));
+
+        jLabelCitasPendientes.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabelCitasPendientes.setText("Citas Médicas Pendientes ");
+        getContentPane().add(jLabelCitasPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
+
+        jTableTablaCitasPendientes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTableTablaCitasPendientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Código", "Fecha", "Hora de Atención", "Medico Responsable", "Especialidad", "Tipo de Exámen", "Observación"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jTableTablaCitasPendientes);
+
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 690, 110));
+
+        jButtonRetroceder.setBackground(new java.awt.Color(204, 255, 255));
+        jButtonRetroceder.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        jButtonRetroceder.setText("Retroceder");
+        jButtonRetroceder.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonRetroceder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRetrocederActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonRetroceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 70, -1));
+
+        jButtonImprimirCita.setBackground(new java.awt.Color(204, 255, 255));
+        jButtonImprimirCita.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        jButtonImprimirCita.setText("Imprimir Cita");
+        jButtonImprimirCita.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(jButtonImprimirCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, -1, -1));
+
+        jLabelFondo.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\plantilla citaPaciente-pica (1).png")); // NOI18N
+        getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNombreActionPerformed
+
+    private void jButtonRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetrocederActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonRetrocederActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +241,34 @@ public class VerCitaPacie extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonImprimirCita;
+    private javax.swing.JButton jButtonRetroceder;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooserFechaNacimiento;
+    private javax.swing.JLabel jLabelApellidoMaterno;
+    private javax.swing.JLabel jLabelApellidoPaterno;
+    private javax.swing.JLabel jLabelCitasPendientes;
+    private javax.swing.JLabel jLabelCorreo;
+    private javax.swing.JLabel jLabelDatosPersonales;
+    private javax.swing.JLabel jLabelDocIdentidad;
+    private javax.swing.JLabel jLabelFondo;
+    private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelTelefono;
+    private javax.swing.JLabel jLabelfechaNacimiento;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTableTablaCitasPendientes;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextFieldApellidoMaterno;
+    private javax.swing.JTextField jTextFieldApellidoPaterno;
+    private javax.swing.JTextField jTextFieldCorreo;
+    private javax.swing.JTextField jTextFieldDocIdentidad;
+    private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JTextField jTextFieldTelefono;
     // End of variables declaration//GEN-END:variables
 }

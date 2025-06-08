@@ -26,21 +26,129 @@ public class GenerarRecetaMedica extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabelRecetaMed = new javax.swing.JLabel();
+        jLabelDoctor = new javax.swing.JLabel();
+        jLabelNumeroCita = new javax.swing.JLabel();
+        jLabelFechaEmicion = new javax.swing.JLabel();
+        jLabelMedicamentos = new javax.swing.JLabel();
+        jTextDoctor = new javax.swing.JTextField();
+        jTextNumeroCita = new javax.swing.JTextField();
+        jDateChooserEmicion = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableMedicamentos = new javax.swing.JTable();
+        jButtonGenerar = new javax.swing.JButton();
+        jButtonSalir = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelImageFondo = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 255, 204));
+        setForeground(java.awt.Color.white);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelRecetaMed.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
+        jLabelRecetaMed.setForeground(new java.awt.Color(0, 153, 153));
+        jLabelRecetaMed.setText("Receta Medica");
+        getContentPane().add(jLabelRecetaMed, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 230, 50));
+
+        jLabelDoctor.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jLabelDoctor.setText("Doctor Responsable (código):");
+        getContentPane().add(jLabelDoctor, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
+
+        jLabelNumeroCita.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jLabelNumeroCita.setText("Número de Cita:");
+        getContentPane().add(jLabelNumeroCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
+
+        jLabelFechaEmicion.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jLabelFechaEmicion.setText("Fecha de emición:");
+        getContentPane().add(jLabelFechaEmicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
+
+        jLabelMedicamentos.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jLabelMedicamentos.setText("Medicamentos");
+        getContentPane().add(jLabelMedicamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 235, -1, -1));
+
+        jTextDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextDoctorActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextDoctor, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 177, -1));
+
+        jTextNumeroCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextNumeroCitaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextNumeroCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 177, -1));
+        getContentPane().add(jDateChooserEmicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, -1, -1));
+
+        jTableMedicamentos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTableMedicamentos.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jTableMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                { new Integer(1), null, null, null, null},
+                { new Integer(2), null, null, null, null},
+                { new Integer(3), null, null, null, null},
+                { new Integer(4), null, null, null, null},
+                { new Integer(5), null, null, null, null}
+            },
+            new String [] {
+                "", "Nombre", "Cantidad", "Periodo (horas)", "Descripción"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableMedicamentos);
+        if (jTableMedicamentos.getColumnModel().getColumnCount() > 0) {
+            jTableMedicamentos.getColumnModel().getColumn(0).setMaxWidth(20);
+        }
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 396, 130));
+
+        jButtonGenerar.setBackground(new java.awt.Color(204, 255, 255));
+        jButtonGenerar.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        jButtonGenerar.setText("Generar");
+        jButtonGenerar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGenerarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 380, 70, -1));
+
+        jButtonSalir.setBackground(new java.awt.Color(204, 255, 255));
+        jButtonSalir.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        jButtonSalir.setText("Salir");
+        jButtonSalir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(jButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 380, 70, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\logoMasVida (1).jpeg")); // NOI18N
+        jLabel2.setToolTipText("");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 60));
+
+        jLabelImageFondo.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\recetamed (1).jpg")); // NOI18N
+        getContentPane().add(jLabelImageFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextDoctorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextDoctorActionPerformed
+
+    private void jTextNumeroCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNumeroCitaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextNumeroCitaActionPerformed
+
+    private void jButtonGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonGenerarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +187,19 @@ public class GenerarRecetaMedica extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonGenerar;
+    private javax.swing.JButton jButtonSalir;
+    private com.toedter.calendar.JDateChooser jDateChooserEmicion;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelDoctor;
+    private javax.swing.JLabel jLabelFechaEmicion;
+    private javax.swing.JLabel jLabelImageFondo;
+    private javax.swing.JLabel jLabelMedicamentos;
+    private javax.swing.JLabel jLabelNumeroCita;
+    private javax.swing.JLabel jLabelRecetaMed;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableMedicamentos;
+    private javax.swing.JTextField jTextDoctor;
+    private javax.swing.JTextField jTextNumeroCita;
     // End of variables declaration//GEN-END:variables
 }
