@@ -128,12 +128,12 @@ public class GenerarRecetaMedica extends javax.swing.JFrame {
         jButtonSalir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(jButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, 70, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\logoMasVida (1).jpeg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logoMasVida.jpeg"))); // NOI18N
         jLabel2.setToolTipText("");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 60));
 
-        jLabelImageFondo.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\recetamed (1).jpg")); // NOI18N
-        getContentPane().add(jLabelImageFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, 450));
+        jLabelImageFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fondoGenerarReceta.jpg"))); // NOI18N
+        getContentPane().add(jLabelImageFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

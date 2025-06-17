@@ -200,7 +200,7 @@ public class VerHistoriaMedico extends javax.swing.JFrame {
         jButtonImprimirCita.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(jButtonImprimirCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 500, -1, -1));
 
-        jLabelFondo.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\historial fondo.png")); // NOI18N
+        jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fondoVerHistorialMed.png"))); // NOI18N
         getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();

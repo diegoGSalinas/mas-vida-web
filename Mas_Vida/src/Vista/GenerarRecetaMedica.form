@@ -247,7 +247,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\user\Downloads\logoMasVida (1).jpeg"/>
+          <Image iconType="3" name="/Images/logoMasVida.jpeg"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
@@ -260,12 +260,12 @@
     <Component class="javax.swing.JLabel" name="jLabelImageFondo">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\user\Downloads\recetamed (1).jpg"/>
+          <Image iconType="3" name="/Images/fondoGenerarReceta.jpg"/>
         </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="-10" width="-1" height="450"/>
+          <AbsoluteConstraints x="0" y="0" width="-1" height="430"/>
         </Constraint>
       </Constraints>
     </Component>

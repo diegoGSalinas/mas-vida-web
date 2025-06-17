@@ -371,7 +371,7 @@
     <Component class="javax.swing.JLabel" name="jLabelFondo">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\user\Downloads\historial fondo.png"/>
+          <Image iconType="3" name="/Images/fondoVerHistorialMed.png"/>
         </Property>
       </Properties>
       <Constraints>
