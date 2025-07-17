@@ -1,0 +1,92 @@
+/* Estilos para la página de citas */
+
+/* Estilos básicos */
+.sidebar {
+    background-color: #343a40;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #495057;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+/* Estilos para la tabla de citas */
+.table-citas {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+.table-citas th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+.table-citas td {
+    vertical-align: middle;
+}
+
+/* Estilos para los botones de acción */
+.btn-group {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+}
+
+/* Estilos para los estados */
+.badge {
+    padding: 5px 10px;
+    font-size: 0.875rem;
+}
+
+/* Estilos para mensajes */
+.message {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Estilos para el modal de confirmación */
+.modal-content {
+    border-radius: 10px;
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.modal-title {
+    font-weight: 600;
+}
