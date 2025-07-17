@@ -45,6 +45,17 @@ public class ControladorLogin extends HttpServlet {
                     request.setAttribute("titulo", "Panel General");
                     request.getRequestDispatcher("/jsp/vistaAdmin.jsp").forward(request, response);
                     break;
+                case 4: // Paciente
+                    request.setAttribute("titulo", "Panel del Paciente");
+                    try {
+                        CitaMedicaDAO citaDAO = CitaMedicaDAO.getInstance();
+                        List<CitaMedica> citas = citaDAO.listarCitasPorPaciente(user.getIdUsuario());
+                        request.setAttribute("citas", citas);
+                    } catch (Exception e) {
+                        request.setAttribute("error", "Error al cargar las citas: " + e.getMessage());
+                    }
+                    request.getRequestDispatcher("/jsp/vistaPaciente.jsp").forward(request, response);
+                    break;
                 case 5: // Recepcionista
                     request.setAttribute("titulo", "Panel General");
                     try {

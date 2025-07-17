@@ -13,6 +13,7 @@ import Dao.CitaMedicaDAO;
 import Modelo.Especialidad;
 import Modelo.Persona;
 import Modelo.CitaMedica;
+import jakarta.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -36,6 +37,12 @@ public class ControladorCitaMedica extends HttpServlet {
             }
         } else if ("inicio".equals(accion)) {
             try {
+                HttpSession session = request.getSession();
+                if (session.getAttribute("usuario") == null) {
+                    response.sendRedirect("login.jsp");
+                    return;
+                }
+
                 CitaMedicaDAO citaDAO = CitaMedicaDAO.getInstance();
                 List<CitaMedica> citas = citaDAO.listarCitas();
                 request.setAttribute("citas", citas);

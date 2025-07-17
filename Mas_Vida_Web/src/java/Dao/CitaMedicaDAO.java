@@ -99,6 +99,60 @@ public class CitaMedicaDAO {
         }
     }
 
+    public List<CitaMedica> listarCitasPorPaciente(String idUsuario) throws SQLException {
+        List<CitaMedica> citas = new ArrayList<>();
+        String sql = "SELECT cm.*, e.nombre as nombre_especialidad "
+                + "FROM cita_medica cm "
+                + "JOIN especialidad e ON cm.id_especialidad = e.id_especialidad "
+                + "WHERE cm.id_persona = (SELECT id_persona FROM usuario WHERE id_usuario = ?)";
+
+        try (Connection conn = Configuracion.Conexion.Obtener_Conexion().Iniciar_Conexion()) {
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, idUsuario);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    while (rs.next()) {
+                        CitaMedica cita = new CitaMedica();
+                        cita.setIdCita(rs.getString("id_cita"));
+                        cita.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
+                        cita.setFechaCita(rs.getTimestamp("fecha_cita").toLocalDateTime());
+                        
+                        // Crear especialidad
+                        Especialidad especialidad = new Especialidad();
+                        especialidad.setIdEspecialidad(rs.getString("id_especialidad"));
+                        especialidad.setNombre(rs.getString("nombre_especialidad"));
+                        cita.setEspecialidad(especialidad);
+                        
+                        // Crear paciente
+                        Persona paciente = new Persona();
+                        paciente.setIdPersona(rs.getLong("id_persona"));
+                        cita.setPaciente(paciente);
+                        
+                        cita.setIdPago(rs.getString("id_pago"));
+                        cita.setEstado(rs.getString("estado"));
+                        
+                        citas.add(cita);
+                    }
+                }
+            }
+        }
+        return citas;
+    }
+
+    public String obtenerNombreEspecialidad(String idEspecialidad) throws SQLException {
+        String sql = "SELECT nombre FROM especialidad WHERE id_especialidad = ?";
+        try (Connection conn = Configuracion.Conexion.Obtener_Conexion().Iniciar_Conexion()) {
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, idEspecialidad);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getString("nombre");
+                    }
+                }
+            }
+        }
+        return "No especificado";
+    }
+
     public void actualizarCita(CitaMedica cita) throws SQLException {
         if (cita == null) {
             throw new IllegalArgumentException("La cita no puede ser null");
