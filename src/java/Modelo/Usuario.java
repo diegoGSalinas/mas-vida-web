@@ -12,6 +12,13 @@ public class Usuario {
         this.contrasena = contrasena;
         this.tipoUsuario = tipoUsuario;
     }
+    
+    public Usuario(String idUsuario, String nombreUsuario, String contrasena, TipoUsuario tipoUsuario) {
+        this.idUsuario = idUsuario;
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
+        this.tipoUsuario = tipoUsuario;
+    }
 
     public Usuario() {
     }
