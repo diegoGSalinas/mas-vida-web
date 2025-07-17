@@ -1,9 +1,3 @@
-<%-- 
-    Document   : vistaRecepcionista
-    Created on : 12 jul. 2025, 12:15:00 p. m.
-    Author     : Diego
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -32,15 +26,15 @@
                             <p class="mb-0">Recepcionista</p>
                         </div>
                         <hr>
-                        <a href="${pageContext.request.contextPath}/ControladorCitaMedica?accion=inicio"><i class="fas fa-home me-2"></i>Inicio</a>
-                        <a href="${pageContext.request.contextPath}/ControladorCitaMedica?accion=listar"><i class="fas fa-calendar-alt me-2"></i>Ver Todas las Citas</a>
-                        <a href="${pageContext.request.contextPath}/jsp/nuevaPersona.jsp"><i class="fas fa-user-plus me-2"></i>Crear Nueva Persona</a>
-                        <a href="${pageContext.request.contextPath}/controladorBuscarPersona"><i class="fas fa-search me-2"></i>Iniciar Búsqueda</a>
+                        <div class="menu-links">
+                            <a href="${pageContext.request.contextPath}/ControladorCitaMedica?accion=inicio"><i class="fas fa-home me-2"></i>Inicio</a>
+                            <a href="${pageContext.request.contextPath}/ControladorCitaMedica?accion=listar"><i class="fas fa-calendar-alt me-2"></i>Ver Todas las Citas</a>
+                            <a href="${pageContext.request.contextPath}/jsp/nuevaPersona.jsp"><i class="fas fa-user-plus me-2"></i>Crear Nueva Persona</a>
+                            <a href="${pageContext.request.contextPath}/controladorBuscarPersona"><i class="fas fa-search me-2"></i>Iniciar Búsqueda</a>
+                            <hr class="mt-3 mb-2">
+                            <a href="${pageContext.request.contextPath}/ControladorLogout" class="logout-button"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a>
+                        </div>
                     </div>
-                    <hr>
-                    <a href="${pageContext.request.contextPath}/ControladorLogout" class="logout-button">
-                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
-                    </a>
                 </div>
 
                 <!-- Main Content -->

@@ -28,7 +28,8 @@
                     <a href="${pageContext.request.contextPath}/ControladorUsuario?accion=verUsuarios"><i class="fas fa-users me-2"></i>Gestión de Usuarios</a>
                     <a href="${pageContext.request.contextPath}/ControladorConfiguracion"><i class="fas fa-cog me-2"></i>Configuración del Sistema</a>
                     <a href="${pageContext.request.contextPath}/ControladorReporte"><i class="fas fa-file-alt me-2"></i>Reportes</a>
-                    <a href="ControladorLogin?accion=logout"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a>
+                    <a href="${pageContext.request.contextPath}/ControladorDashboard"><i class="fas fa-chart-line me-2"></i>Dashboard</a>
+                    <a href="${pageContext.request.contextPath}/ControladorLogout"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a>
                 </div>
 
                 <!-- Contenido Principal -->
@@ -64,6 +65,16 @@
                                     <h5 class="card-title">Reportes</h5>
                                     <p class="card-text">Genera reportes del sistema</p>
                                     <a href="${pageContext.request.contextPath}/ControladorReporte" class="btn btn-light">Ir a Reportes</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card admin-card text-white bg-warning">
+                                <div class="card-body">
+                                    <h5 class="card-title">Dashboard</h5>
+                                    <p class="card-text">Visualiza estadísticas y gráficos del sistema</p>
+                                    <a href="${pageContext.request.contextPath}/ControladorDashboard" class="btn btn-light">Ir a Dashboard</a>
                                 </div>
                             </div>
                         </div>
