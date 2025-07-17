@@ -38,17 +38,20 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="dni" class="form-label">DNI</label>
-                                        <input type="text" class="form-control" id="dni" name="dni" required>
+                                        <input type="text" class="form-control" id="dni" name="dni" required maxlength="8">
+                                        <div class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="correo" class="form-label">Correo Electrónico</label>
                                         <input type="email" class="form-control" id="correo" name="correo" required>
+                                        <div class="error"></div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="telefono" class="form-label">Teléfono</label>
-                                        <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                                        <input type="tel" class="form-control" id="telefono" name="telefono" required maxlength="9">
+                                        <div class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -76,5 +79,90 @@
 
         <!-- Bootstrap Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Estilos personalizados -->
+        <link href="../css/nuevaPersona.css" rel="stylesheet">
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const form = document.getElementById('formNuevaPersona');
+                const dniInput = document.getElementById('dni');
+                const correoInput = document.getElementById('correo');
+                const telefonoInput = document.getElementById('telefono');
+
+                // Validación de DNI
+                dniInput.addEventListener('input', function () {
+                    const dniValue = this.value;
+                    const errorDiv = this.nextElementSibling;
+
+                    if (!/^[0-9]{0,8}$/.test(dniValue)) {
+                        errorDiv.textContent = 'El DNI debe contener solo números y tener 8 dígitos';
+                        this.classList.add('is-invalid');
+                    } else {
+                        errorDiv.textContent = '';
+                        this.classList.remove('is-invalid');
+                    }
+                });
+
+                // Validación de Correo
+                correoInput.addEventListener('input', function () {
+                    const correoValue = this.value;
+                    const errorDiv = this.nextElementSibling;
+
+                    const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!correoRegex.test(correoValue)) {
+                        errorDiv.textContent = 'Formato de correo inválido';
+                        this.classList.add('is-invalid');
+                    } else {
+                        errorDiv.textContent = '';
+                        this.classList.remove('is-invalid');
+                    }
+                });
+
+                // Validación de Teléfono
+                telefonoInput.addEventListener('input', function () {
+                    const telefonoValue = this.value;
+                    const errorDiv = this.nextElementSibling;
+
+                    if (!/^[0-9]{0,9}$/.test(telefonoValue)) {
+                        errorDiv.textContent = 'El teléfono debe contener solo números y tener 9 dígitos';
+                        this.classList.add('is-invalid');
+                    } else {
+                        errorDiv.textContent = '';
+                        this.classList.remove('is-invalid');
+                    }
+                });
+
+                // Validación final antes de enviar el formulario
+                form.addEventListener('submit', function (e) {
+                    let isValid = true;
+
+                    // Verificar DNI
+                    if (!/^[0-9]{8}$/.test(dniInput.value)) {
+                        dniInput.nextElementSibling.textContent = 'El DNI debe contener 8 dígitos';
+                        dniInput.classList.add('is-invalid');
+                        isValid = false;
+                    }
+
+                    // Verificar Correo
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correoInput.value)) {
+                        correoInput.nextElementSibling.textContent = 'Formato de correo inválido';
+                        correoInput.classList.add('is-invalid');
+                        isValid = false;
+                    }
+
+                    // Verificar Teléfono
+                    if (!/^[0-9]{9}$/.test(telefonoInput.value)) {
+                        telefonoInput.nextElementSibling.textContent = 'El teléfono debe contener 9 dígitos';
+                        telefonoInput.classList.add('is-invalid');
+                        isValid = false;
+                    }
+
+                    if (!isValid) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
