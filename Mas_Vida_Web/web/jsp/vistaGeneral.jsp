@@ -33,7 +33,7 @@
                     <a href="#"><i class="fas fa-home me-2"></i>Inicio</a>
                     <a href="#"><i class="fas fa-user me-2"></i>Mi Perfil</a>
                     <a href="#"><i class="fas fa-cog me-2"></i>Configuraciones</a>
-                    <a href="ControladorLogin?accion=logout"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a>
+                    <a href="${pageContext.request.contextPath}/ControladorLogout"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a>
                 </div>
 
                 <!-- Main Content -->

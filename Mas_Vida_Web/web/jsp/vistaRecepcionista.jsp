@@ -38,7 +38,7 @@
                         <a href="${pageContext.request.contextPath}/controladorBuscarPersona"><i class="fas fa-search me-2"></i>Iniciar Búsqueda</a>
                     </div>
                     <hr>
-                    <a href="${pageContext.request.contextPath}/ControladorLogin?accion=logout" class="logout-button">
+                    <a href="${pageContext.request.contextPath}/ControladorLogout" class="logout-button">
                         <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
                     </a>
                 </div>

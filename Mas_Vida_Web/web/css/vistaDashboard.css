@@ -1,0 +1,253 @@
+/* Estilos específicos para el dashboard */
+
+/* Variables de color */
+:root {
+    --primary-color: #007bff;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --sidebar-bg: #343a40;
+    --sidebar-hover: #495057;
+    --card-shadow: 0 0 15px rgba(0,0,0,0.1);
+    --text-light: rgba(255,255,255,0.9);
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #343a40;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #495057;
+}
+
+/* Contenido principal */
+.main-content {
+    padding: 20px;
+    margin-left: 250px;
+    min-height: 100vh;
+}
+
+/* Información del usuario */
+.user-info {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0;
+}
+
+/* Contenido principal */
+.main-content {
+    padding: 20px;
+    margin-left: 250px;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    position: absolute;
+    left: 250px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+/* Cards de estadísticas */
+.card-stats {
+    border: none;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    background: white;
+}
+
+.card-stats:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.card-stats .card-body {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.card-stats .icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card-stats:nth-child(1) .icon {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.card-stats:nth-child(2) .icon {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.card-stats:nth-child(3) .icon {
+    background-color: var(--info-color);
+    color: white;
+}
+
+.card-stats:nth-child(4) .icon {
+    background-color: var(--warning-color);
+    color: white;
+}
+
+.card-stats .content {
+    flex: 1;
+}
+
+.card-stats .title {
+    color: #6c757d;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.card-stats .number {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Gráficos */
+.card {
+    border: none;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    background: white;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    padding: 15px 20px;
+}
+
+.card-header h5 {
+    margin: 0;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.card-body {
+    padding: 20px;
+    background: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .card-stats {
+        margin-bottom: 15px;
+    }
+
+    .card-stats .card-body {
+        padding: 15px;
+    }
+
+    .card-stats .icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .card-stats .number {
+        font-size: 20px;
+    }
+
+    .card {
+        margin-bottom: 15px;
+    }
+
+    .card-header {
+        padding: 10px 15px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .card-stats {
+        margin-bottom: 15px;
+    }
+
+    .card-stats .card-body {
+        padding: 15px;
+    }
+
+    .card-stats .icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .card-stats .number {
+        font-size: 20px;
+    }
+
+    .card {
+        margin-bottom: 15px;
+    }
+
+    .card-header {
+        padding: 10px 15px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .user-info {
+        margin-bottom: 15px;
+    }
+}

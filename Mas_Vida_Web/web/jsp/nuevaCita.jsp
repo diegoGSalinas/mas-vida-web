@@ -89,9 +89,11 @@
                                         </c:if>
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
-                                                <label for="fechaSolicitud" class="form-label">Fecha de Solicitud</label>
-                                                <input type="datetime-local" class="form-control" id="fechaSolicitud" name="fechaSolicitud" 
-                                                       value="${currentDate}" required>
+                                                <label class="form-label">Fecha de Solicitud</label>
+                                                <input type="text" class="form-control" 
+                                                       value="${currentDate}" 
+                                                       name="fechaSolicitud"
+                                                       readonly>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="fechaCita" class="form-label">Fecha de Cita</label>
