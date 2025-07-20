@@ -25,9 +25,8 @@ public class GestionUsuarioDAO {
 
     public List<Usuario> obtenerTodos() {
         List<Usuario> lista = new ArrayList<>();
-        String sql = "SELECT u.id_usuario, u.nombre_usuario, u.contrasena, tu.prioridad " +
-                     "FROM usuario u " +
-                     "INNER JOIN tipo_usuario tu ON u.id_tipo_usuario = tu.id_tipo_usuario";
+        String sql = "SELECT u.id_usuario, u.nombre_usuario, u.contrasena, u.id_tipo_usuario as prioridad " +
+                     "FROM usuario u";
 
         try (
             Connection con = conexion.Iniciar_Conexion();
@@ -54,28 +53,17 @@ public class GestionUsuarioDAO {
     }
     public List<String> obtenerNombresTipoUsuario() {
     List<String> nombres = new ArrayList<>();
-    String sql = "SELECT nombre FROM tipo_usuario";
-
-    try (Connection con = conexion.Iniciar_Conexion();
-         PreparedStatement ps = con.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()) {
-
-        while (rs.next()) {
-            nombres.add(rs.getString("nombre"));
-        }
-
-    } catch (SQLException e) {
-        System.out.println("Error al obtener nombres de tipo usuario: " + e.getMessage());
+    // Usamos la prioridad del enum TipoUsuario en lugar de la tabla
+    for (TipoUsuario tipo : TipoUsuario.values()) {
+        nombres.add(tipo.getNombre());
     }
-
     return nombres;
 }
     
     public Usuario buscarPorId(String idUsuario) {
     Usuario usuario = null;
-    String sql = "SELECT u.id_usuario, u.nombre_usuario, u.contrasena, tu.nombre " +
+    String sql = "SELECT u.id_usuario, u.nombre_usuario, u.contrasena, u.id_tipo_usuario as prioridad " +
              "FROM usuario u " +
-             "INNER JOIN tipo_usuario tu ON u.id_tipo_usuario = tu.id_tipo_usuario " +
              "WHERE u.id_usuario = ?";
 
     try (
@@ -85,15 +73,15 @@ public class GestionUsuarioDAO {
         ps.setString(1, idUsuario);
         try (ResultSet rs = ps.executeQuery()) {
             if (rs.next()) {
-    usuario = new Usuario();
-    usuario.setIdUsuario(rs.getString("id_usuario"));
-    usuario.setNombreUsuario(rs.getString("nombre_usuario"));
-    usuario.setContrasena(rs.getString("contrasena"));
+                usuario = new Usuario();
+                usuario.setIdUsuario(rs.getString("id_usuario"));
+                usuario.setNombreUsuario(rs.getString("nombre_usuario"));
+                usuario.setContrasena(rs.getString("contrasena"));
 
-    String nombreTipo = rs.getString("nombre");
-    TipoUsuario tipo = TipoUsuario.valueOf(nombreTipo.toUpperCase()); // Si coincide con enum
-    usuario.setTipoUsuario(tipo);
-}
+                int prioridad = rs.getInt("prioridad");
+                TipoUsuario tipo = mapearTipoUsuario(prioridad);
+                usuario.setTipoUsuario(tipo);
+            }
         }
     } catch (SQLException e) {
         System.err.println("Error al buscar usuario por ID: " + e.getMessage());
@@ -102,13 +90,13 @@ public class GestionUsuarioDAO {
     return usuario;
 }
     private TipoUsuario mapearTipoUsuario(int prioridad) {
-    for (TipoUsuario tipo : TipoUsuario.values()) {
-        if (tipo.getPrioridad() == prioridad) {
-            return tipo;
+        for (TipoUsuario tipo : TipoUsuario.values()) {
+            if (tipo.getPrioridad() == prioridad) {
+                return tipo;
+            }
         }
+        return null;
     }
-    return null;
-}
     public boolean guardar(Usuario usuario) {
     String sql = "INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, id_tipo_usuario) VALUES (?, ?, ?, ?)";
 

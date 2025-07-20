@@ -29,13 +29,29 @@
                     <a href="${pageContext.request.contextPath}/ControladorConfiguracion"><i class="fas fa-cog me-2"></i>Configuración del Sistema</a>
                     <a href="${pageContext.request.contextPath}/ControladorReporte"><i class="fas fa-file-alt me-2"></i>Reportes</a>
                     <a href="${pageContext.request.contextPath}/ControladorDashboard"><i class="fas fa-chart-line me-2"></i>Dashboard</a>
+                    <a href="#" class="backup-link" onclick="realizarBackup()"><i class="fas fa-database me-2"></i>Realizar Backup</a>
+                    <hr class="bg-white my-3">
                     <a href="${pageContext.request.contextPath}/ControladorLogout"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a>
                 </div>
 
                 <!-- Contenido Principal -->
                 <div class="col-md-9">
-                    <div class="message success">
-                        ${mensaje}
+                    <!-- Success Modal for Backup -->
+                    <div class="modal fade" id="backupSuccessModal" tabindex="-1" aria-labelledby="backupSuccessModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="backupSuccessModalLabel">Backup Exitoso</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Se ha realizado el backup de la base de datos exitosamente.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -85,5 +101,25 @@
 
         <!-- Bootstrap Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <!-- JavaScript para el backup -->
+        <script>
+            function realizarBackup() {
+                fetch('${pageContext.request.contextPath}/vistaAdmin?accion=backup', {
+                    method: 'GET'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        const modal = new bootstrap.Modal(document.getElementById('backupSuccessModal'));
+                        modal.show();
+                    } else {
+                        console.error('Error al realizar el backup');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        </script>
     </body>
 </html>

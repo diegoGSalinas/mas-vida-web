@@ -4,9 +4,10 @@ public enum TipoUsuario {
 
     ADMINISTRADOR(1, "ADMINISTRADOR", "Tiene acceso completo al sistema"),
     DOCTOR(2, "DOCTOR", "Puede gestionar exámenes y citas"),
-    TECNICO(3, "TECNICO", "Puede realizar exámenes"),
-    PACIENTE(4, "PACIENTE", "Puede crear y ver citas propias"),
-    RECEPCIONISTA(5, "RECEPCIONISTA", "Puede gestionar citas y pacientes");
+    RECEPCIONISTA(3, "RECEPCIONISTA", "Puede gestionar citas y pacientes"),
+    TECNICO(4, "TECNICO", "Puede realizar exámenes"),
+    PACIENTE(5, "PACIENTE", "Puede crear y ver citas propias");
+    
 
     private final int prioridad;
     private final String nombre;

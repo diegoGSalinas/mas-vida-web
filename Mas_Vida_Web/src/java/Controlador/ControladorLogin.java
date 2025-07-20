@@ -35,7 +35,14 @@ public class ControladorLogin extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("usuario", user);
-            request.setAttribute("mensaje", "Inicio de sesión exitoso");
+            session.setAttribute("nuevoInicioSesion", "true");
+            
+            // Solo mostrar mensaje de éxito si es el primer inicio de sesión
+            String nuevoInicio = (String) session.getAttribute("nuevoInicioSesion");
+            if (nuevoInicio != null && nuevoInicio.equals("true")) {
+                request.setAttribute("mensaje", "✅ Inicio de sesión exitoso");
+                session.removeAttribute("nuevoInicioSesion");
+            }
 
             // Redirigir según el tipo de usuario
             int prioridad = user.getTipoUsuario().getPrioridad();
@@ -45,7 +52,11 @@ public class ControladorLogin extends HttpServlet {
                     request.setAttribute("titulo", "Panel General");
                     request.getRequestDispatcher("/jsp/vistaAdmin.jsp").forward(request, response);
                     break;
-                case 4: // Paciente
+                case 2: // Doctor
+                    request.setAttribute("titulo", "Panel del Doctor");
+                    request.getRequestDispatcher("/jsp/vistaDoctor.jsp").forward(request, response);
+                    break;
+                case 5: // Paciente
                     request.setAttribute("titulo", "Panel del Paciente");
                     try {
                         CitaMedicaDAO citaDAO = CitaMedicaDAO.getInstance();
@@ -56,7 +67,7 @@ public class ControladorLogin extends HttpServlet {
                     }
                     request.getRequestDispatcher("/jsp/vistaPaciente.jsp").forward(request, response);
                     break;
-                case 5: // Recepcionista
+                case 3: // Recepcionista
                     request.setAttribute("titulo", "Panel General");
                     try {
                         CitaMedicaDAO citaDAO = CitaMedicaDAO.getInstance();
