@@ -152,6 +152,30 @@
                     <div class="invalid-feedback">Seleccione el estado.</div>
                 </div>
 
+                <!-- Campos adicionales para Doctores y Técnicos -->
+                <div id="camposEspeciales" style="display: none;">
+                    <div class="mb-3">
+                        <label for="turno" class="form-label">Turno</label>
+                        <select class="form-select" id="turno" name="turno" required>
+                            <option value="">Seleccione</option>
+                            <option value="Mañana">Diurno</option>
+                            <option value="Tarde">Vesperino</option>
+                        </select>
+                        <div class="invalid-feedback">Seleccione el turno.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="especialidad" class="form-label">Especialidad</label>
+                        <select class="form-select" id="especialidad" name="especialidad" required>
+                            <option value="">Seleccione</option>
+                            <c:forEach var="especialidad" items="${especialidades}">
+                                <option value="${especialidad.idEspecialidad}">${especialidad.nombre}</option>
+                            </c:forEach>
+                        </select>
+                        <div class="invalid-feedback">Seleccione la especialidad.</div>
+                    </div>
+                </div>
+
                 <!-- Botones -->
                 <div class="mt-4">
                     <button type="submit" class="btn btn-primary" name="accion" value="guardar">Guardar</button>
@@ -161,6 +185,80 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Función para mostrar/ocultar campos según el tipo de usuario
+    function mostrarCamposAdicionales() {
+        const tipoUsuario = document.querySelector('select[name="tipoUsuario"]').value;
+        const camposEspeciales = document.getElementById('camposEspeciales');
+        const prioridadesDoctorTecnico = ['DOCTOR', 'TECNICO'];
+        
+        camposEspeciales.style.display = prioridadesDoctorTecnico.includes(tipoUsuario) ? 'block' : 'none';
+    }
+
+    // Event listener para el cambio en el select de tipo de usuario
+    document.addEventListener('DOMContentLoaded', function() {
+        const tipoUsuarioSelect = document.querySelector('select[name="tipoUsuario"]');
+        if (tipoUsuarioSelect) {
+            tipoUsuarioSelect.addEventListener('change', mostrarCamposAdicionales);
+            // Llamar a la función inicialmente para mostrar/ocultar campos
+            mostrarCamposAdicionales();
+        }
+    });
+
+    // Validación Bootstrap
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            const forms = document.getElementsByClassName('needs-validation');
+            Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    const idUsuario = document.getElementById('idUsuario').value.trim();
+                    const dni = document.getElementById('dni').value.trim();
+                    const telefono = document.getElementById('telefono').value.trim();
+                    
+                    if (!idUsuario) {
+                        alert('Debe generar o ingresar un ID de usuario válido');
+                        event.preventDefault();
+                        return;
+                    }
+
+                    // Validación adicional para DNI y teléfono
+                    if (dni.length !== 8) {
+                        alert('El DNI debe tener exactamente 8 dígitos');
+                        event.preventDefault();
+                        return;
+                    }
+
+                    if (telefono.length !== 9) {
+                        alert('El teléfono debe tener exactamente 9 dígitos');
+                        event.preventDefault();
+                        return;
+                    }
+
+                    // Validación adicional para doctores y técnicos
+                    const camposEspeciales = document.getElementById('camposEspeciales');
+                    if (camposEspeciales.style.display === 'block') {
+                        const turno = document.getElementById('turno').value;
+                        const especialidad = document.getElementById('especialidad').value;
+                        
+                        if (!turno || !especialidad) {
+                            alert('Debe seleccionar el turno y la especialidad para doctores y técnicos');
+                            event.preventDefault();
+                            return;
+                        }
+                    }
+
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        });
+    })();
+</script>
 
 <script>
     // Validación Bootstrap
@@ -260,3 +358,4 @@
 </script>
 </body>
 </html>
+    

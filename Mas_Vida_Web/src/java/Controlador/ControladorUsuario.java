@@ -3,6 +3,7 @@
 package Controlador;
 
 import Dao.GestionUsuarioDAO;
+import Modelo.Especialidad;
 import Modelo.Usuario;
 import Modelo.TipoUsuario;
 import jakarta.servlet.ServletException;
@@ -79,7 +80,9 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
     private void mostrarFormularioNuevoUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<String> nombresTipoUsuario = gestionUsuarioDAO.obtenerNombresTipoUsuario();
+        List<Especialidad> especialidades = gestionUsuarioDAO.obtenerEspecialidades();
         request.setAttribute("nombresTipoUsuario", nombresTipoUsuario);
+        request.setAttribute("especialidades", especialidades);
         request.getRequestDispatcher("/jsp/agregarUsuario.jsp").forward(request, response);
     }
 
@@ -87,32 +90,46 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         try {
             // Obtener datos de la persona
-            String nombres = request.getParameter("nombres");
-            String apPaterno = request.getParameter("apPaterno");
-            String apMaterno = request.getParameter("apMaterno");
+            String nombres = new String(request.getParameter("nombres").getBytes("ISO-8859-1"), "UTF-8");
+            String apPaterno = new String(request.getParameter("apPaterno").getBytes("ISO-8859-1"), "UTF-8");
+            String apMaterno = new String(request.getParameter("apMaterno").getBytes("ISO-8859-1"), "UTF-8");
             String dni = request.getParameter("dni");
-            String correo = request.getParameter("correo");
-            String direccion = request.getParameter("direccion");
+            String correo = new String(request.getParameter("correo").getBytes("ISO-8859-1"), "UTF-8");
+            String direccion = new String(request.getParameter("direccion").getBytes("ISO-8859-1"), "UTF-8");
             String telefono = request.getParameter("telefono");
             String fechaNacimiento = request.getParameter("fechaNacimiento");
 
             // Obtener datos del usuario
             String id = request.getParameter("idUsuario");
-            String nombre = request.getParameter("nombre_usuario");
-            String contrasena = request.getParameter("contrasena");
-            String tipo = request.getParameter("tipoUsuario");
-            String estado = request.getParameter("estado");
+            String nombre = new String(request.getParameter("nombre_usuario").getBytes("ISO-8859-1"), "UTF-8");
+            String contrasena = new String(request.getParameter("contrasena").getBytes("ISO-8859-1"), "UTF-8");
+            String tipo = new String(request.getParameter("tipoUsuario").getBytes("ISO-8859-1"), "UTF-8");
+            String estado = new String(request.getParameter("estado").getBytes("ISO-8859-1"), "UTF-8");
+
+            // Obtener datos específicos para doctores y técnicos
+            String turno = new String(request.getParameter("turno").getBytes("ISO-8859-1"), "UTF-8");
+            String idEspecialidad = request.getParameter("especialidad");
 
             // Crear objeto Usuario
             Usuario nuevoUsuario = new Usuario();
             nuevoUsuario.setIdUsuario(id);
             nuevoUsuario.setNombreUsuario(nombre);
             nuevoUsuario.setContrasena(contrasena);
-            nuevoUsuario.setTipoUsuario(TipoUsuario.valueOf(tipo));
+            // Convertir el nombre a mayúsculas para coincidir con el enum
+            nuevoUsuario.setTipoUsuario(TipoUsuario.valueOf(tipo.toUpperCase()));
 
             // Crear usuario y persona usando el nuevo método
             gestionUsuarioDAO.crearUsuarioYPersona(nuevoUsuario, nombres, apPaterno, apMaterno, 
-                                                  dni, correo, direccion, telefono, fechaNacimiento);
+                                                   dni, correo, direccion, telefono, fechaNacimiento);
+
+            // Crear entrada en la tabla correspondiente según el tipo de usuario
+            if (nuevoUsuario.getTipoUsuario().getPrioridad() == 2) {
+                // Si es doctor, crear en la tabla doctor
+                gestionUsuarioDAO.crearDoctor(nuevoUsuario.getIdUsuario(), turno, Integer.parseInt(idEspecialidad));
+            } else if (nuevoUsuario.getTipoUsuario().getPrioridad() == 4) {
+                // Si es técnico, crear en la tabla tecnico
+                gestionUsuarioDAO.crearTecnico(nuevoUsuario.getIdUsuario(), turno, Integer.parseInt(idEspecialidad));
+            }
 
             // Actualizar estado
             gestionUsuarioDAO.actualizar(nuevoUsuario, estado);

@@ -26,8 +26,7 @@
                     <hr class="bg-white">
                     <a href="${pageContext.request.contextPath}/vistaAdmin"><i class="fas fa-home me-2"></i>Inicio</a>
                     <a href="${pageContext.request.contextPath}/ControladorUsuario?accion=verUsuarios"><i class="fas fa-users me-2"></i>Gestión de Usuarios</a>
-                    <a href="${pageContext.request.contextPath}/controladorPersona?accion=listar"><i class="fas fa-users me-2"></i>Lista de Personas</a>
-                    <a href="${pageContext.request.contextPath}/ControladorReporte"><i class="fas fa-file-alt me-2"></i>Reportes</a>
+                    <a href="${pageContext.request.contextPath}/controladorPersona?accion=listar"><i class="fas fa-users me-2"></i>Lista de Personal</a>
                     <a href="${pageContext.request.contextPath}/ControladorDashboard"><i class="fas fa-chart-line me-2"></i>Dashboard</a>
                     <a href="#" class="backup-link" onclick="realizarBackup()"><i class="fas fa-database me-2"></i>Realizar Backup</a>
                     <hr class="bg-white my-3">
@@ -68,19 +67,9 @@
                         <div class="col-md-4">
                             <div class="card admin-card text-white bg-success">
                                 <div class="card-body">
-                                    <h5 class="card-title">Lista de Personas</h5>
-                                    <p class="card-text">Ver lista completa de personas</p>
-                                    <a href="${pageContext.request.contextPath}/controladorPersona?accion=listar" class="btn btn-light">Ver Personas</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="card admin-card text-white bg-info">
-                                <div class="card-body">
-                                    <h5 class="card-title">Reportes</h5>
-                                    <p class="card-text">Genera reportes del sistema</p>
-                                    <a href="${pageContext.request.contextPath}/ControladorReporte" class="btn btn-light">Ir a Reportes</a>
+                                    <h5 class="card-title">Lista de Personal</h5>
+                                    <p class="card-text">Ver lista completa del Personal</p>
+                                    <a href="${pageContext.request.contextPath}/controladorPersona?accion=listar" class="btn btn-light">Ver Personal</a>
                                 </div>
                             </div>
                         </div>
