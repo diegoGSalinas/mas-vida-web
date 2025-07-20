@@ -14,6 +14,8 @@ import Configuracion.Conexion;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GestionUsuarioDAO {
 
@@ -143,4 +145,66 @@ public class GestionUsuarioDAO {
     }
 }
 
+    public Usuario crearUsuarioYPersona(Usuario usuario, String nombres, String apPaterno, String apMaterno, String dni, String correo, String direccion, String telefono, String fechaNacimientoStr) throws SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = conexion.Iniciar_Conexion();
+            con.setAutoCommit(false); // Iniciar transacción
+
+            // 1. Crear la persona primero
+            String sqlPersona = "INSERT INTO persona (nombres, ap_paterno, ap_materno, dni, correo, direccion, telefono, fecha_nacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            ps = con.prepareStatement(sqlPersona, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, nombres);
+            ps.setString(2, apPaterno);
+            ps.setString(3, apMaterno);
+            ps.setString(4, dni);
+            ps.setString(5, correo);
+            ps.setString(6, direccion);
+            ps.setString(7, telefono);
+            
+            // Convertir la fecha de nacimiento de String a Date
+            java.sql.Date fechaNacimiento = java.sql.Date.valueOf(fechaNacimientoStr);
+            ps.setDate(8, fechaNacimiento);
+            ps.executeUpdate();
+            
+            // Obtener el id_persona generado
+            rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                Long idPersona = rs.getLong(1);
+                usuario.setIdPersona(idPersona);
+            }
+
+            // 2. Crear el usuario
+            String sqlUsuario = "INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, id_tipo_usuario, id_persona) VALUES (?, ?, ?, ?, ?)";
+            ps = con.prepareStatement(sqlUsuario);
+            ps.setString(1, usuario.getIdUsuario());
+            ps.setString(2, usuario.getNombreUsuario());
+            ps.setString(3, usuario.getContrasena());
+            ps.setInt(4, usuario.getTipoUsuario().getPrioridad());
+            ps.setLong(5, usuario.getIdPersona());
+            ps.executeUpdate();
+
+            con.commit(); // Confirmar transacción
+            return usuario;
+        } catch (SQLException e) {
+            if (con != null) {
+                try {
+                    con.rollback(); // Revertir cambios en caso de error
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            throw e;
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

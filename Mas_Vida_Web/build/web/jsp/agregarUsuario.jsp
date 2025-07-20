@@ -16,10 +16,88 @@
     </head>
     <body class="bg-light">
         <div class="container mt-5">
-            <h2 class="mb-4">Agregar Nuevo Usuario</h2>
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Agregar Nuevo Usuario</h3>
+                </div>
+                <div class="card-body">
+                    <form action="ControladorUsuario" method="post" class="needs-validation" novalidate>
+                        <input type="hidden" name="accion" value="guardar">
+                        <!-- Mensajes -->
+                        <c:if test="${not empty mensaje}">
+                            <div class="alert alert-${tipoMensaje}">
+                                ${mensaje}
+                            </div>
+                        </c:if>
 
-            <form action="ControladorUsuario" method="post" class="needs-validation" novalidate>
-                <input type="hidden" name="accion" value="guardar">
+                        <!-- Datos Personales -->
+                        <h4 class="mb-4">Datos Personales</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="nombres" class="form-label">Nombres:</label>
+                                    <input type="text" class="form-control" id="nombres" name="nombres" required>
+                                    <div class="invalid-feedback">Este campo es requerido.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="apPaterno" class="form-label">Apellido Paterno:</label>
+                                    <input type="text" class="form-control" id="apPaterno" name="apPaterno" required>
+                                    <div class="invalid-feedback">Este campo es requerido.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="apMaterno" class="form-label">Apellido Materno:</label>
+                                    <input type="text" class="form-control" id="apMaterno" name="apMaterno">
+                                    <div class="invalid-feedback">Este campo es opcional.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="dni" class="form-label">DNI:</label>
+                                    <input type="text" class="form-control" id="dni" name="dni" pattern="\d{8}" required>
+                                    <div class="invalid-feedback">El DNI debe tener exactamente 8 dígitos numéricos.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="correo" class="form-label">Correo:</label>
+                                    <input type="email" class="form-control" id="correo" name="correo" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                                    <div class="invalid-feedback">Ingrese un correo electrónico válido.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="telefono" class="form-label">Teléfono:</label>
+                                    <input type="text" class="form-control" id="telefono" name="telefono" pattern="\d{9}" required>
+                                    <div class="invalid-feedback">El teléfono debe tener exactamente 9 dígitos numéricos.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento:</label>
+                                    <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
+                                    <div class="invalid-feedback">Ingrese una fecha válida.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="direccion" class="form-label">Dirección:</label>
+                                    <textarea class="form-control" id="direccion" name="direccion" rows="3" required></textarea>
+                                    <div class="invalid-feedback">Este campo es requerido.</div>
+                                </div>
+                            </div>
+                        </div>
 
                 <!-- ID de Usuario con generación automática -->
                 <div class="mb-3">
@@ -75,58 +153,110 @@
                 </div>
 
                 <!-- Botones -->
-                <div class="d-flex justify-content-between">
-                    <button type="submit" class="btn btn-success">Guardar</button>
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary" name="accion" value="guardar">Guardar</button>
                     <a href="${pageContext.request.contextPath}/ControladorUsuario?accion=verUsuarios" class="btn btn-secondary">Cancelar</a>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
 
-            <script>
-                // Validación Bootstrap
-                (function () {
-                    'use strict';
-                    window.addEventListener('load', function () {
-                        const forms = document.getElementsByClassName('needs-validation');
-                        Array.prototype.filter.call(forms, function (form) {
-                            form.addEventListener('submit', function (event) {
-                                if (!form.checkValidity()) {
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                }
-                                form.classList.add('was-validated');
-                            }, false);
-                        });
-                    }, false);
-                })();
-                //GENERACION DE ID POR TIPO
-                function generarId() {
-                    const tipoSelect = document.querySelector('select[name="tipoUsuario"]');
-                    const tipo = tipoSelect.value;
-                    const inputId = document.getElementById("idUsuario");
-
-                    if (!tipo) {
-                        alert("Por favor seleccione un tipo de usuario.");
+<script>
+    // Validación Bootstrap
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            const forms = document.getElementsByClassName('needs-validation');
+            Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    const idUsuario = document.getElementById('idUsuario').value.trim();
+                    const dni = document.getElementById('dni').value.trim();
+                    const telefono = document.getElementById('telefono').value.trim();
+                    
+                    if (!idUsuario) {
+                        alert('Debe generar o ingresar un ID de usuario válido');
+                        event.preventDefault();
                         return;
                     }
 
-                    // Define los prefijos por tipo de usuario
-                    const prefijos = {
-                        ADMINISTRADOR: "ADMIN",
-                        DOCTOR: "DOC",
-                        RECEPCIONISTA: "RECEP",
-                        TECNICO: "TEC",
-                        PACIENTE: "PAC"
-                    };
+                    // Validación adicional para DNI y teléfono
+                    if (dni.length !== 8) {
+                        alert('El DNI debe tener exactamente 8 dígitos');
+                        event.preventDefault();
+                        return;
+                    }
 
-                    // Generar número aleatorio de 3 dígitos (puedes cambiarlo por lógica de contador)
-                    const numero = String(Math.floor(Math.random() * 999) + 1).padStart(3, "0");
+                    if (telefono.length !== 9) {
+                        alert('El teléfono debe tener exactamente 9 dígitos');
+                        event.preventDefault();
+                        return;
+                    }
 
-                    const prefijo = prefijos[tipo] || "USR";
-                    const idGenerado = prefijo + numero;
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 
-                    inputId.value = idGenerado;
-                }
-            </script>
-        </div>
-    </body>
+    // Validación personalizada para DNI
+    const dniInput = document.getElementById('dni');
+    dniInput.addEventListener('input', function() {
+        const dni = this.value;
+        if (dni.length > 8) {
+            this.value = dni.slice(0, 8);
+        }
+        // Verificar que solo sean números
+        if (!/^[0-9]*$/.test(dni)) {
+            this.value = dni.replace(/[^0-9]/g, '');
+        }
+    });
+
+    // Validación personalizada para teléfono
+    const telefonoInput = document.getElementById('telefono');
+    telefonoInput.addEventListener('input', function() {
+        const telefono = this.value;
+        if (telefono.length > 9) {
+            this.value = telefono.slice(0, 9);
+        }
+        // Verificar que solo sean números
+        if (!/^[0-9]*$/.test(telefono)) {
+            this.value = telefono.replace(/[^0-9]/g, '');
+        }
+    });
+
+    // GENERACION DE ID POR TIPO
+    function generarId() {
+        const tipoSelect = document.querySelector('select[name="tipoUsuario"]');
+        const tipo = tipoSelect.value;
+        const inputId = document.getElementById("idUsuario");
+
+        if (!tipo) {
+            alert("Por favor seleccione un tipo de usuario.");
+            return;
+        }
+
+        // Define los prefijos por tipo de usuario
+        const prefijos = {
+            ADMINISTRADOR: "ADMIN",
+            DOCTOR: "DOC",
+            RECEPCIONISTA: "RECEP",
+            TECNICO: "TEC",
+            PACIENTE: "PAC"
+        };
+
+        // Generar número aleatorio de 3 dígitos (puedes cambiarlo por lógica de contador)
+        const numero = String(Math.floor(Math.random() * 999) + 1).padStart(3, "0");
+
+        const prefijo = prefijos[tipo] || "USR";
+        const idGenerado = prefijo + numero;
+
+        inputId.value = idGenerado;
+    }
+</script>
+</body>
 </html>
