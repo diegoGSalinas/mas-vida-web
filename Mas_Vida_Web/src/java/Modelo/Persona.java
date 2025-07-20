@@ -13,6 +13,7 @@ public class Persona {
     private String direccion;
     private String telefono;
     private Date fechaNacimiento;
+    private String tipoUsuario;
 
     public Persona(String nombres, String apPaterno, String apMaterno, String dni, String correo, String direccion, String telefono, Date fechaNacimiento) {
         this.nombres = nombres;
@@ -64,6 +65,10 @@ public class Persona {
         return telefono;
     }
 
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -94,6 +99,10 @@ public class Persona {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     public void setFechaNacimiento(Date fechaNacimiento) {
