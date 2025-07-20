@@ -4,6 +4,8 @@ import Modelo.Persona;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PersonaDAO {
 
@@ -99,6 +101,51 @@ public class PersonaDAO {
                 return null;
             }
         }
+    }
+
+    public List<Persona> listarPersonas(String filtroTipo) throws SQLException {
+        String sql = "SELECT p.*, tu.nombre as tipo_usuario "
+                + "FROM persona p "
+                + "LEFT JOIN usuario u ON p.id_persona = u.id_persona "
+                + "LEFT JOIN tipo_usuario tu ON u.id_tipo_usuario = tu.id_tipo_usuario "
+                + "ORDER BY p.id_persona";
+        
+        if (filtroTipo != null && !filtroTipo.isEmpty()) {
+            sql = "SELECT p.*, tu.nombre as tipo_usuario "
+                    + "FROM persona p "
+                    + "LEFT JOIN usuario u ON p.id_persona = u.id_persona "
+                    + "LEFT JOIN tipo_usuario tu ON u.id_tipo_usuario = tu.id_tipo_usuario "
+                    + "WHERE tu.nombre = ? "
+                    + "ORDER BY p.id_persona";
+        }
+        
+        List<Persona> personas = new ArrayList<>();
+
+        try (Connection conn = Configuracion.Conexion.Obtener_Conexion().Iniciar_Conexion()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            
+            if (filtroTipo != null && !filtroTipo.isEmpty()) {
+                pstmt.setString(1, filtroTipo);
+            }
+            
+            try (java.sql.ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Persona persona = new Persona();
+                    persona.setIdPersona(rs.getLong("id_persona"));
+                    persona.setNombres(rs.getString("nombres"));
+                    persona.setApPaterno(rs.getString("ap_paterno"));
+                    persona.setApMaterno(rs.getString("ap_materno"));
+                    persona.setDni(rs.getString("dni"));
+                    persona.setCorreo(rs.getString("correo"));
+                    persona.setDireccion(rs.getString("direccion"));
+                    persona.setTelefono(rs.getString("telefono"));
+                    persona.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+                    persona.setTipoUsuario(rs.getString("tipo_usuario"));
+                    personas.add(persona);
+                }
+            }
+        }
+        return personas;
     }
 
     public Persona buscarPorDni(String dni) throws SQLException {
