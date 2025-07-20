@@ -10,6 +10,10 @@ public class ExamenMedico {
     private LocalDateTime fechaExamen;
     private Paciente paciente;
     private Doctor doctor;
+    
+    private String resultados;
+    private String idTecnico;
+    private String idCita;
 
     public ExamenMedico(String idExamen, CitaMedica citaMedica, LocalDateTime fechaRegistro, LocalDateTime fechaExamen, Paciente paciente, Doctor doctor) {
         this.idExamen = idExamen;
@@ -27,10 +31,44 @@ public class ExamenMedico {
         this.paciente = paciente;
         this.doctor = doctor;
     }
+    
+    public ExamenMedico(String idExamen, LocalDateTime fechaExamen, String resultados, String idTecnico, String idCita) {
+    this.idExamen = idExamen;
+    this.fechaExamen = fechaExamen;
+    this.resultados = resultados;
+    this.idTecnico = idTecnico;
+    this.idCita = idCita;
+}
 
     public ExamenMedico() {
     }
 
+    public String getResultados() {
+        return resultados;
+    }
+
+    public void setResultados(String resultados) {
+        this.resultados = resultados;
+    }
+
+    public String getIdTecnico() {
+        return idTecnico;
+    }
+
+    public void setIdTecnico(String idTecnico) {
+        this.idTecnico = idTecnico;
+    }
+
+    public String getIdCita() {
+        return idCita;
+    }
+
+    public void setIdCita(String idCita) {
+        this.idCita = idCita;
+    }
+    
+    
+    
     public String getIdExamen() {
         return idExamen;
     }

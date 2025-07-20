@@ -25,7 +25,9 @@
                     <select id="filtroTipo" class="form-select me-2">
                         <option value="">Todos los tipos</option>
                         <c:forEach var="tipo" items="${tiposUsuario}">
-                            <option value="${tipo.nombre}" ${param.tipoUsuario == tipo.nombre ? 'selected' : ''}>${tipo.nombre}</option>
+                            <c:if test="${tipo.nombre != 'PACIENTE'}">
+                                <option value="${tipo.nombre}" ${param.tipoUsuario == tipo.nombre ? 'selected' : ''}>${tipo.nombre}</option>
+                            </c:if>
                         </c:forEach>
                     </select>
                     <button id="btnFiltrar" class="btn btn-primary">Filtrar</button>

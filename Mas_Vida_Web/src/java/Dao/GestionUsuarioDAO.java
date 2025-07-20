@@ -10,6 +10,7 @@ package Dao;
 import Modelo.Usuario;
 import Modelo.TipoUsuario;
 import Configuracion.Conexion;
+import Modelo.Especialidad;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -205,6 +206,66 @@ public class GestionUsuarioDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public List<Especialidad> obtenerEspecialidades() {
+        List<Especialidad> especialidades = new ArrayList<>();
+        String sql = "SELECT id_especialidad, nombre FROM especialidad";
+
+        try (
+            Connection con = conexion.Iniciar_Conexion();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()
+        ) {
+            while (rs.next()) {
+                Especialidad especialidad = new Especialidad();
+                especialidad.setIdEspecialidad(String.valueOf(rs.getInt("id_especialidad")));
+                especialidad.setNombre(rs.getString("nombre"));
+                especialidades.add(especialidad);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener especialidades: " + e.getMessage());
+        }
+
+        return especialidades;
+    }
+
+    public void crearDoctor(String idUsuario, String turno, int idEspecialidad) throws SQLException {
+        String sql = "INSERT INTO doctor (id_doctor, turno, estado, id_especialidad, id_persona) " +
+                    "SELECT ?, ?, 'Activo', ?, p.id_persona " +
+                    "FROM usuario u " +
+                    "JOIN persona p ON u.id_persona = p.id_persona " +
+                    "WHERE u.id_usuario = ?";
+
+        try (
+            Connection con = conexion.Iniciar_Conexion();
+            PreparedStatement ps = con.prepareStatement(sql)
+        ) {
+            ps.setString(1, idUsuario);
+            ps.setString(2, turno);
+            ps.setInt(3, idEspecialidad);
+            ps.setString(4, idUsuario);
+            ps.executeUpdate();
+        }
+    }
+
+    public void crearTecnico(String idUsuario, String turno, int idEspecialidad) throws SQLException {
+        String sql = "INSERT INTO tecnico (id_tecnico, turno, estado, id_especialidad, id_persona) " +
+                    "SELECT ?, ?, 'Activo', ?, p.id_persona " +
+                    "FROM usuario u " +
+                    "JOIN persona p ON u.id_persona = p.id_persona " +
+                    "WHERE u.id_usuario = ?";
+
+        try (
+            Connection con = conexion.Iniciar_Conexion();
+            PreparedStatement ps = con.prepareStatement(sql)
+        ) {
+            ps.setString(1, idUsuario);
+            ps.setString(2, turno);
+            ps.setInt(3, idEspecialidad);
+            ps.setString(4, idUsuario);
+            ps.executeUpdate();
         }
     }
 }

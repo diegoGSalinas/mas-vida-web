@@ -3,6 +3,10 @@ package Controlador;
 import Dao.UsuarioDAO;
 import Modelo.Usuario;
 import Dao.CitaMedicaDAO;
+import Dao.EspecialidadDAO;
+import Dao.ExamenMedicoDAO;
+import Modelo.Especialidad;
+import Modelo.ExamenMedico;
 import Modelo.CitaMedica;
 import java.util.List;
 import java.io.IOException;
@@ -56,17 +60,6 @@ public class ControladorLogin extends HttpServlet {
                     request.setAttribute("titulo", "Panel del Doctor");
                     request.getRequestDispatcher("/jsp/vistaDoctor.jsp").forward(request, response);
                     break;
-                case 5: // Paciente
-                    request.setAttribute("titulo", "Panel del Paciente");
-                    try {
-                        CitaMedicaDAO citaDAO = CitaMedicaDAO.getInstance();
-                        List<CitaMedica> citas = citaDAO.listarCitasPorPaciente(user.getIdUsuario());
-                        request.setAttribute("citas", citas);
-                    } catch (Exception e) {
-                        request.setAttribute("error", "Error al cargar las citas: " + e.getMessage());
-                    }
-                    request.getRequestDispatcher("/jsp/vistaPaciente.jsp").forward(request, response);
-                    break;
                 case 3: // Recepcionista
                     request.setAttribute("titulo", "Panel General");
                     try {
@@ -78,6 +71,22 @@ public class ControladorLogin extends HttpServlet {
                     }
                     request.getRequestDispatcher("/jsp/vistaRecepcionista.jsp").forward(request, response);
                     break;
+                case 4: // Tecnico
+                    request.setAttribute("titulo", "Panel General");
+                    response.sendRedirect("ControladorExamen?accion=listar");        
+                    break;
+                case 5: // Paciente
+                    request.setAttribute("titulo", "Panel del Paciente");
+                    try {
+                        CitaMedicaDAO citaDAO = CitaMedicaDAO.getInstance();
+                        List<CitaMedica> citas = citaDAO.listarCitasPorPaciente(user.getIdUsuario());
+                        request.setAttribute("citas", citas);
+                    } catch (Exception e) {
+                        request.setAttribute("error", "Error al cargar las citas: " + e.getMessage());
+                    }
+                    request.getRequestDispatcher("/jsp/vistaPaciente.jsp").forward(request, response);
+                    break;
+                
                 default:
                     request.setAttribute("titulo", "Panel General");
                     request.getRequestDispatcher("/jsp/vistaGeneral.jsp").forward(request, response);
