@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import Modelo.BackupJob;
 import Modelo.Usuario;
 
 @WebServlet(name = "ControladorAdmin", urlPatterns = {"/vistaAdmin"})
@@ -22,8 +23,34 @@ public class ControladorAdmin extends HttpServlet {
             return;
         }
 
+        // Verificar si se solicitó un backup
+        String accion = request.getParameter("accion");
+        if ("backup".equals(accion)) {
+            try {
+                BackupJob.ejecutarBackup();
+                request.setAttribute("backupMensaje", "✅ Backup realizado exitosamente");
+            } catch (Exception e) {
+                request.setAttribute("backupMensaje", "❌ Error al realizar el backup: " + e.getMessage());
+            }
+        }
+
         // Lógica específica del administrador a implementar
         request.setAttribute("titulo", "Panel de Administrador");
+        
+        // Si hay un mensaje de backup, mostrar un popup usando JavaScript
+        if (request.getAttribute("backupMensaje") != null) {
+            String mensaje = (String) request.getAttribute("backupMensaje");
+            String script = "<script type='text/javascript'>"
+                    + "setTimeout(function() {"
+                    + "    alert(\"" + mensaje + "\");"
+                    + "}, 100);"
+                    + "</script>";
+            request.setAttribute("script", script);
+        }
+        
+        // Mantener el usuario en la sesión
+        request.getSession().setAttribute("usuario", usuario);
+        
         request.getRequestDispatcher("/jsp/vistaAdmin.jsp").forward(request, response);
     }
 

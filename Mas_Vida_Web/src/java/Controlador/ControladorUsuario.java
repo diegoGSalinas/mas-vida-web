@@ -84,20 +84,49 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
     }
 
     private void guardarUsuario(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
+            throws IOException, ServletException {
         try {
+            // Obtener datos de la persona
+            String nombres = request.getParameter("nombres");
+            String apPaterno = request.getParameter("apPaterno");
+            String apMaterno = request.getParameter("apMaterno");
+            String dni = request.getParameter("dni");
+            String correo = request.getParameter("correo");
+            String direccion = request.getParameter("direccion");
+            String telefono = request.getParameter("telefono");
+            String fechaNacimiento = request.getParameter("fechaNacimiento");
+
+            // Obtener datos del usuario
             String id = request.getParameter("idUsuario");
             String nombre = request.getParameter("nombre_usuario");
-            String contrasena = request.getParameter("contrasena"); 
+            String contrasena = request.getParameter("contrasena");
             String tipo = request.getParameter("tipoUsuario");
+            String estado = request.getParameter("estado");
 
-            Usuario nuevoUsuario = new Usuario(id, nombre, contrasena, TipoUsuario.valueOf(tipo));
-            gestionUsuarioDAO.guardar(nuevoUsuario);
+            // Crear objeto Usuario
+            Usuario nuevoUsuario = new Usuario();
+            nuevoUsuario.setIdUsuario(id);
+            nuevoUsuario.setNombreUsuario(nombre);
+            nuevoUsuario.setContrasena(contrasena);
+            nuevoUsuario.setTipoUsuario(TipoUsuario.valueOf(tipo));
 
+            // Crear usuario y persona usando el nuevo método
+            gestionUsuarioDAO.crearUsuarioYPersona(nuevoUsuario, nombres, apPaterno, apMaterno, 
+                                                  dni, correo, direccion, telefono, fechaNacimiento);
+
+            // Actualizar estado
+            gestionUsuarioDAO.actualizar(nuevoUsuario, estado);
+
+            request.setAttribute("mensaje", "Usuario registrado exitosamente");
+            request.setAttribute("tipoMensaje", "success");
             response.sendRedirect("ControladorUsuario?accion=verUsuarios");
+            
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("vistaAdmin.jsp");
+            request.setAttribute("mensaje", "Error al registrar usuario: " + e.getMessage());
+            request.setAttribute("tipoMensaje", "danger");
+            request.getRequestDispatcher("/jsp/agregarUsuario.jsp").forward(request, response);
+            throw new ServletException("Error al procesar el registro del usuario", e);
         }
     }
 

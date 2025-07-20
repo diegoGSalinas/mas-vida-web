@@ -6,6 +6,7 @@ public class Usuario {
     private String nombreUsuario;
     private String contrasena;
     private TipoUsuario tipoUsuario;
+    private Long idPersona;
 
     public Usuario(String nombreUsuario, String contrasena, TipoUsuario tipoUsuario) {
         this.nombreUsuario = nombreUsuario;
@@ -53,6 +54,14 @@ public class Usuario {
 
     public void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public Long getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(Long idPersona) {
+        this.idPersona = idPersona;
     }
 
 }

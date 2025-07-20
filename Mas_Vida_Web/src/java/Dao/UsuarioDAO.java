@@ -73,4 +73,38 @@ public class UsuarioDAO {
         }
         return user;
     }
+
+    public Usuario obtenerUsuarioConPersona(String idUsuario) {
+        Usuario user = null;
+        try {
+            Connection con = conexion.Iniciar_Conexion();
+            PreparedStatement ps = con.prepareStatement(
+                "SELECT u.*, tu.prioridad, p.id_persona FROM usuario u "
+                + "INNER JOIN tipo_usuario tu ON u.id_tipo_usuario = tu.id_tipo_usuario "
+                + "LEFT JOIN persona p ON u.id_persona = p.id_persona "
+                + "WHERE u.id_usuario = ?"
+            );
+            ps.setString(1, idUsuario);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                user = new Usuario();
+                user.setIdUsuario(rs.getString("id_usuario"));
+                user.setNombreUsuario(rs.getString("nombre_usuario"));
+                
+                // Obtener el TipoUsuario usando el método fromPrioridad
+                int prioridad = rs.getInt("prioridad");
+                TipoUsuario tipo = TipoUsuario.values()[prioridad - 1];
+                user.setTipoUsuario(tipo);
+                
+                // Obtener id_persona
+                Long idPersona = rs.getLong("id_persona");
+                user.setIdPersona(idPersona != 0 ? idPersona : null);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener usuario con persona: " + e.getMessage());
+            return null;
+        }
+        return user;
+    }
 }

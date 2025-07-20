@@ -34,7 +34,7 @@ public class ControladorDashboard extends HttpServlet {
                 break;
 
             default:
-                request.setAttribute("mensaje", "Acción no válida");
+                // No establecer mensaje para acciones no válidas
                 request.getRequestDispatcher("jsp/vistaDashboard.jsp").forward(request, response);
                 break;
         }
