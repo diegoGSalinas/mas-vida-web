@@ -54,4 +54,26 @@ public class EspecialidadDAO {
             throw new RuntimeException("Error al buscar especialidad: " + e.getMessage(), e);
         }
     }
+
+    public String obtenerEspecialidadPorDoctor(String idUsuario) {
+        try (Connection con = obtenerConexion();
+             PreparedStatement ps = con.prepareStatement(
+                 "SELECT e.id_especialidad " +
+                 "FROM especialidad e " +
+                 "JOIN doctor d ON e.id_especialidad = d.id_especialidad " +
+                 "JOIN usuario u ON d.id_persona = u.id_persona " +
+                 "WHERE u.id_usuario = ?")) {
+
+            ps.setString(1, idUsuario);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("id_especialidad");
+            }
+            return null;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al obtener especialidad del doctor: " + e.getMessage(), e);
+        }
+    }
 }

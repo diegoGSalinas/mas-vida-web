@@ -8,6 +8,7 @@ import Dao.ExamenMedicoDAO;
 import Modelo.Especialidad;
 import Modelo.ExamenMedico;
 import Modelo.CitaMedica;
+import Modelo.TipoUsuario;
 import java.util.List;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -41,7 +42,6 @@ public class ControladorLogin extends HttpServlet {
             session.setAttribute("usuario", user);
             session.setAttribute("nuevoInicioSesion", "true");
             
-            // Solo mostrar mensaje de éxito si es el primer inicio de sesión
             String nuevoInicio = (String) session.getAttribute("nuevoInicioSesion");
             if (nuevoInicio != null && nuevoInicio.equals("true")) {
                 request.setAttribute("mensaje", "✅ Inicio de sesión exitoso");
@@ -57,8 +57,25 @@ public class ControladorLogin extends HttpServlet {
                     request.getRequestDispatcher("/jsp/vistaAdmin.jsp").forward(request, response);
                     break;
                 case 2: // Doctor
-                    request.setAttribute("titulo", "Panel del Doctor");
-                    request.getRequestDispatcher("/jsp/vistaDoctor.jsp").forward(request, response);
+                    // Verificar si el usuario es doctor
+                    if (user.getTipoUsuario().equals(TipoUsuario.DOCTOR)) {
+                        EspecialidadDAO especialidadDAO = new EspecialidadDAO();
+                        String idEspecialidad = especialidadDAO.obtenerEspecialidadPorDoctor(user.getIdUsuario());
+                        
+                        if (idEspecialidad != null) {
+                            session.setAttribute("id_especialidad", idEspecialidad);
+                            request.setAttribute("titulo", "Panel del Doctor");
+                            request.getRequestDispatcher("/jsp/vistaDoctor.jsp").forward(request, response);
+                        } else {
+                            session.setAttribute("id_especialidad", "0");
+                            request.setAttribute("error", "No se pudo obtener la especialidad del doctor");
+                            request.setAttribute("titulo", "Panel del Doctor");
+                            request.getRequestDispatcher("/jsp/vistaDoctor.jsp").forward(request, response);
+                        }
+                    } else {
+                        request.setAttribute("error", "Usuario no es un doctor");
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                    }
                     break;
                 case 3: // Recepcionista
                     request.setAttribute("titulo", "Panel General");
