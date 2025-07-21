@@ -1,15 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>${titulo}</title>
-        <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <!-- Estilos específicos para doctor -->
         <link href="${pageContext.request.contextPath}/css/vistaDoctor.css" rel="stylesheet">
     </head>
     <body>
@@ -24,8 +22,7 @@
                         <p class="text-white mb-0">Doctor</p>
                     </div>
                     <hr class="bg-white">
-                    <a href="${pageContext.request.contextPath}/ControladorCitaMedica?accion=listarCitasDoctor"><i class="fas fa-calendar-alt me-2"></i>Citas Pendientes</a>
-                    <a href="${pageContext.request.contextPath}/ControladorCitaMedica?accion=verHistorial"><i class="fas fa-history me-2"></i>Historial de Citas</a>
+                    <a href="${pageContext.request.contextPath}/ControladorDoctor"><i class="fas fa-home me-2"></i>Inicio</a>
                     <hr class="bg-white my-3">
                     <a href="${pageContext.request.contextPath}/ControladorLogout"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a>
                 </div>
@@ -44,26 +41,18 @@
                         </div>
                     </c:if>
 
-                    <!-- Tarjetas de información -->
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="doctor-card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Citas Pendientes</h5>
-                                    <h2 class="card-text">0</h2>
-                                    <a href="${pageContext.request.contextPath}/ControladorCitaMedica?accion=listarCitasDoctor" class="btn btn-primary">Ver Citas</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="doctor-card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Historial</h5>
-                                    <h2 class="card-text">0</h2>
-                                    <a href="${pageContext.request.contextPath}/ControladorCitaMedica?accion=verHistorial" class="btn btn-primary">Ver Historial</a>
-                                </div>
-                            </div>
+                    <!-- Tarjeta de Citas Médicas -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title d-flex justify-content-between align-items-center">
+                                <span><i class="fas fa-calendar-alt me-2"></i>Citas Médicas</span>
+                                <a href="/Mas_Vida_Web/ControladorDoctor?accion=verCitasMedicas" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-eye me-1"></i>Ver Citas
+                                </a>
+                            </h5>
+                            <p class="card-text">
+                                Gestione sus citas médicas y acceda al historial de citas.
+                            </p>
                         </div>
                     </div>
                 </div>

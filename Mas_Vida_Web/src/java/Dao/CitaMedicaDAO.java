@@ -39,6 +39,38 @@ public class CitaMedicaDAO {
         return 0;
     }
 
+    public int contarCitasDelDia(String idEspecialidad) throws SQLException {
+        String sql = "SELECT COUNT(*) as total_citas "
+                + "FROM cita_medica "
+                + "WHERE id_especialidad = ? "
+                + "AND DATE(fecha_cita) = CURRENT_DATE "
+                + "AND estado = 'Pendiente'";
+
+        try (Connection conn = Configuracion.Conexion.Obtener_Conexion().Iniciar_Conexion()) {
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, idEspecialidad);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getInt("total_citas");
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
+    public boolean actualizarEstadoCita(String idCita, String nuevoEstado) throws SQLException {
+        String sql = "UPDATE cita_medica SET estado = ? WHERE id_cita = ?";
+
+        try (Connection conn = Configuracion.Conexion.Obtener_Conexion().Iniciar_Conexion()) {
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, nuevoEstado);
+                pstmt.setString(2, idCita);
+                return pstmt.executeUpdate() > 0;
+            }
+        }
+    }
+
     public void crearCita(CitaMedica cita) throws SQLException {
         if (cita == null) {
             throw new IllegalArgumentException("La cita no puede ser null");
@@ -115,21 +147,21 @@ public class CitaMedicaDAO {
                         cita.setIdCita(rs.getString("id_cita"));
                         cita.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
                         cita.setFechaCita(rs.getTimestamp("fecha_cita").toLocalDateTime());
-                        
+
                         // Crear especialidad
                         Especialidad especialidad = new Especialidad();
                         especialidad.setIdEspecialidad(rs.getString("id_especialidad"));
                         especialidad.setNombre(rs.getString("nombre_especialidad"));
                         cita.setEspecialidad(especialidad);
-                        
+
                         // Crear paciente
                         Persona paciente = new Persona();
                         paciente.setIdPersona(rs.getLong("id_persona"));
                         cita.setPaciente(paciente);
-                        
+
                         cita.setIdPago(rs.getString("id_pago"));
                         cita.setEstado(rs.getString("estado"));
-                        
+
                         citas.add(cita);
                     }
                 }
@@ -210,7 +242,6 @@ public class CitaMedicaDAO {
                         cita.setIdPago(rs.getString("id_pago"));
                         cita.setEstado(rs.getString("estado"));
 
-                        // Crear objeto Persona con todos los datos
                         Persona paciente = new Persona();
                         paciente.setIdPersona(Long.parseLong(rs.getString("id_persona")));
                         paciente.setDni(rs.getString("dni"));
@@ -221,6 +252,48 @@ public class CitaMedicaDAO {
 
                         Especialidad especialidad = new Especialidad();
                         especialidad.setIdEspecialidad(rs.getString("id_especialidad"));
+                        cita.setEspecialidad(especialidad);
+
+                        citas.add(cita);
+                    }
+                }
+            }
+        }
+        return citas;
+    }
+
+    public List<CitaMedica> listarCitasPorEspecialidad(String idEspecialidad) throws SQLException {
+        List<CitaMedica> citas = new ArrayList<>();
+        String sql = "SELECT cm.*, p.dni, p.nombres, p.ap_paterno, p.ap_materno, e.nombre as nombre_especialidad "
+                + "FROM cita_medica cm "
+                + "JOIN persona p ON cm.id_persona = p.id_persona "
+                + "JOIN especialidad e ON cm.id_especialidad = e.id_especialidad "
+                + "WHERE cm.id_especialidad = ?";
+
+        try (Connection conn = Configuracion.Conexion.Obtener_Conexion().Iniciar_Conexion()) {
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, Integer.parseInt(idEspecialidad));
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    while (rs.next()) {
+                        CitaMedica cita = new CitaMedica();
+                        cita.setIdCita(rs.getString("id_cita"));
+                        cita.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
+                        cita.setFechaCita(rs.getTimestamp("fecha_cita").toLocalDateTime());
+                        cita.setIdPago(rs.getString("id_pago"));
+                        cita.setEstado(rs.getString("estado"));
+
+                        // Crear objeto Persona
+                        Persona paciente = new Persona();
+                        paciente.setIdPersona(Long.parseLong(rs.getString("id_persona")));
+                        paciente.setDni(rs.getString("dni"));
+                        paciente.setNombres(rs.getString("nombres"));
+                        paciente.setApPaterno(rs.getString("ap_paterno"));
+                        paciente.setApMaterno(rs.getString("ap_materno"));
+                        cita.setPaciente(paciente);
+
+                        Especialidad especialidad = new Especialidad();
+                        especialidad.setIdEspecialidad(Integer.toString(rs.getInt("id_especialidad")));
+                        especialidad.setNombre(rs.getString("nombre_especialidad"));
                         cita.setEspecialidad(especialidad);
 
                         citas.add(cita);

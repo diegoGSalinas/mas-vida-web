@@ -1,72 +1,72 @@
 package Modelo;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 public class HistorialMedico {
 
     private String idHistorial;
-    private LocalDateTime fechaCreacion;
-    private List<CitaMedica> citasMedicas;
-    private List<RecetaMedica> recetasMedicas;
-    private List<ExamenMedico> examenesMedicos;
-
-    public HistorialMedico(String idHistorial, LocalDateTime fechaCreacion, List<CitaMedica> citasMedicas, List<RecetaMedica> recetasMedicas, List<ExamenMedico> examenesMedicos) {
-        this.idHistorial = idHistorial;
-        this.fechaCreacion = fechaCreacion;
-        this.citasMedicas = citasMedicas;
-        this.recetasMedicas = recetasMedicas;
-        this.examenesMedicos = examenesMedicos;
-    }
-
-    public HistorialMedico(LocalDateTime fechaCreacion, List<CitaMedica> citasMedicas, List<RecetaMedica> recetasMedicas, List<ExamenMedico> examenesMedicos) {
-        this.fechaCreacion = fechaCreacion;
-        this.citasMedicas = citasMedicas;
-        this.recetasMedicas = recetasMedicas;
-        this.examenesMedicos = examenesMedicos;
-    }
+    private long idPersona;
+    private String idExamen = null;
+    private String motivo;
+    private String diagnostico;
+    private String tratamiento;
 
     public HistorialMedico() {
+    }
+
+    public HistorialMedico(String idHistorial, long idPersona, String idExamen, String motivo, String diagnostico, String tratamiento) {
+        this.idHistorial = idHistorial;
+        this.idPersona = idPersona;
+        this.idExamen = idExamen;
+        this.motivo = motivo;
+        this.diagnostico = diagnostico;
+        this.tratamiento = tratamiento;
     }
 
     public String getIdHistorial() {
         return idHistorial;
     }
 
-    public LocalDateTime getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public List<CitaMedica> getCitasMedicas() {
-        return citasMedicas;
-    }
-
-    public List<RecetaMedica> getRecetasMedicas() {
-        return recetasMedicas;
-    }
-
-    public List<ExamenMedico> getExamenesMedicos() {
-        return examenesMedicos;
-    }
-
     public void setIdHistorial(String idHistorial) {
         this.idHistorial = idHistorial;
     }
 
-    public void setFechaCreacion(LocalDateTime fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public long getIdPersona() {
+        return idPersona;
     }
 
-    public void setCitasMedicas(List<CitaMedica> citasMedicas) {
-        this.citasMedicas = citasMedicas;
+    public void setIdPersona(long idPersona) {
+        this.idPersona = idPersona;
     }
 
-    public void setRecetasMedicas(List<RecetaMedica> recetasMedicas) {
-        this.recetasMedicas = recetasMedicas;
+    public String getIdExamen() {
+        return idExamen;
     }
 
-    public void setExamenesMedicos(List<ExamenMedico> examenesMedicos) {
-        this.examenesMedicos = examenesMedicos;
+    public void setIdExamen(String idExamen) {
+        this.idExamen = idExamen;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
+    public String getDiagnostico() {
+        return diagnostico;
+    }
+
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
+    }
+
+    public String getTratamiento() {
+        return tratamiento;
+    }
+
+    public void setTratamiento(String tratamiento) {
+        this.tratamiento = tratamiento;
     }
 
 }
